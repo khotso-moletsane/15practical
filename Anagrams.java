@@ -1,4 +1,6 @@
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.ArrayList;
 
 public class Anagrams {
 
@@ -19,6 +21,27 @@ public class Anagrams {
         Arrays.sort(chars);                // sort characters alphabetically
 
         return new String(chars);          // convert back to string
+    }
+
+    // add word to dictionary using its signature
+    static void addWord(HashMap<String, ArrayList<String>> dict,
+                        String key,
+                        String word) {
+
+        // if signature not yet in dictionary create new list
+        if (!dict.containsKey(key)) {
+
+            ArrayList<String> list = new ArrayList<>();
+
+            list.add(word);
+
+            dict.put(key, list);
+
+        } else {
+
+            // otherwise add word to existing list
+            dict.get(key).add(word);
+        }
     }
 
 }
