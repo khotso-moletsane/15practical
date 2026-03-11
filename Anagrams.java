@@ -87,27 +87,32 @@ public class Anagrams {
         }
     }
 
-    // write anagrams to a text file
-    static void writeAnagramsToFile(HashMap<String, ArrayList<String>> dict, String filename) {
+    // write anagrams to a LaTeX file
+    static void writeAnagramsToLatex(HashMap<String, ArrayList<String>> dict, String filename) {
 
         try (PrintWriter writer = new PrintWriter(new FileWriter(filename))) {
+
+            writer.println("\\documentclass{article}");
+            writer.println("\\begin{document}");
+            writer.println("\\begin{itemize}");
 
             for (String key : dict.keySet()) {
 
                 ArrayList<String> words = dict.get(key);
 
-                // only write groups with more than one word
                 if (words.size() >= 2) {
 
-                    writer.println(words);
+                    String wordsList = String.join(", ", words);
+                    writer.println("    \\item " + wordsList);
                 }
             }
 
-            System.out.println("Anagrams written to " + filename);
+            writer.println("\\end{itemize}");
+            writer.println("\\end{document}");
 
         } catch (IOException e) {
 
-            System.out.println("Error writing to file: " + filename);
+            System.out.println("Error writing to LaTeX file.");
         }
     }
 
@@ -135,8 +140,6 @@ public class Anagrams {
         }
 
         printAnagrams(dict);
-
-        // Write anagrams to a text file
-        writeAnagramsToFile(dict, "anagrams_output.txt");
+        writeAnagramsToLatex(dict, "anagrams_output.tex");
     }
 }
