@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 
 public class Anagrams {
 
@@ -85,6 +87,30 @@ public class Anagrams {
         }
     }
 
+    // write anagrams to a text file
+    static void writeAnagramsToFile(HashMap<String, ArrayList<String>> dict, String filename) {
+
+        try (PrintWriter writer = new PrintWriter(new FileWriter(filename))) {
+
+            for (String key : dict.keySet()) {
+
+                ArrayList<String> words = dict.get(key);
+
+                // only write groups with more than one word
+                if (words.size() >= 2) {
+
+                    writer.println(words);
+                }
+            }
+
+            System.out.println("Anagrams written to " + filename);
+
+        } catch (IOException e) {
+
+            System.out.println("Error writing to file: " + filename);
+        }
+    }
+
     public static void main(String[] args) {
 
         HashMap<String, ArrayList<String>> dict = new HashMap<>();
@@ -110,6 +136,7 @@ public class Anagrams {
 
         printAnagrams(dict);
 
+        // Write anagrams to a text file
+        writeAnagramsToFile(dict, "anagrams_output.txt");
     }
-
 }
