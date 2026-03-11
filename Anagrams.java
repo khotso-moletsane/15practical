@@ -51,6 +51,12 @@ public class Anagrams {
         // split line into individual words
         String[] words = line.split("\\s+");
 
+        for (String w : words) {
+
+            w = cleanWord(w); // clean punctuation and lowercase
+
+        }
+
     }
 
 }
