@@ -1,6 +1,6 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.ArrayList;
 
 public class Anagrams {
 
@@ -51,9 +51,10 @@ public class Anagrams {
         // split line into individual words
         String[] words = line.split("\\s+");
 
+        // go through each word
         for (String w : words) {
 
-            w = cleanWord(w); // clean punctuation and lowercase
+            w = cleanWord(w); // remove punctuation
 
             // ignore very short words
             if (w.length() > 1) {
@@ -61,9 +62,21 @@ public class Anagrams {
                 String key = signature(w); // create signature
 
                 addWord(dict, key, w); // store word
-
+            }
         }
-
     }
+    // print groups of words that share the same signature
+    static void printAnagrams(HashMap<String, ArrayList<String>> dict) {
 
+        for (String key : dict.keySet()) {
+
+            ArrayList<String> words = dict.get(key);
+
+            // only print groups with more than one word
+            if (words.size() >= 2) {
+
+                System.out.println(words);
+            }
+        }
+    }
 }
