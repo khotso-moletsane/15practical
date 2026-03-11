@@ -44,4 +44,13 @@ public class Anagrams {
         }
     }
 
+    // process each line from the file
+    static void processLine(String line,
+                            HashMap<String, ArrayList<String>> dict) {
+
+        // split line into individual words
+        String[] words = line.split("\\s+");
+
+    }
+
 }
