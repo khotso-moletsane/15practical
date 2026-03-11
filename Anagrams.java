@@ -1,6 +1,9 @@
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class Anagrams {
 
@@ -16,11 +19,12 @@ public class Anagrams {
     // generate sorted signature for a word
     static String signature(String word) {
 
-        char[] chars = word.toCharArray(); // convert word to char array
+        char[] chars = word.toCharArray();
 
-        Arrays.sort(chars);                // sort characters alphabetically
+        Arrays.sort(chars);
 
-        return new String(chars);          // convert back to string
+        return new String(chars);
+
     }
 
     // add word to dictionary using its signature
@@ -65,6 +69,7 @@ public class Anagrams {
             }
         }
     }
+
     // print groups of words that share the same signature
     static void printAnagrams(HashMap<String, ArrayList<String>> dict) {
 
@@ -79,4 +84,32 @@ public class Anagrams {
             }
         }
     }
+
+    public static void main(String[] args) {
+
+        HashMap<String, ArrayList<String>> dict = new HashMap<>();
+
+        try {
+
+            BufferedReader reader =
+                    new BufferedReader(new FileReader("joyce1922_ulysses.text"));
+
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+
+                processLine(line, dict);
+            }
+
+            reader.close();
+
+        } catch (IOException e) {
+
+            System.out.println("Error reading file.");
+        }
+
+        printAnagrams(dict);
+
+    }
+
 }
