@@ -55,9 +55,12 @@ public class Anagrams {
 
             w = cleanWord(w); // clean punctuation and lowercase
 
-            String key = signature(w); // create signature
+            // ignore very short words
+            if (w.length() > 1) {
 
-            addWord(dict, key, w); // store word
+                String key = signature(w); // create signature
+
+                addWord(dict, key, w); // store word
 
         }
 
